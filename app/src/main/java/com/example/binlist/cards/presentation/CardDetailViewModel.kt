@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.binlist.Card
 import com.example.binlist.cards.data.CardDetailRepository
-import com.example.binlist.cards.data.cloud.CardDetailCloudDataSourse
+import com.example.binlist.cards.data.cloud.CardDetailCloudDataSource
 import com.example.binlist.cards.data.cloud.CardDetailService
 import com.example.binlist.cards.data.cloud.CloudModule
 import com.example.binlist.cards.domain.CardIterator
@@ -34,7 +34,7 @@ class CardDetailViewModel : ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             val cardinfo =
-                CardIterator.Base(CardDetailRepository.Base(CardDetailCloudDataSourse.Base(
+                CardIterator.Base(CardDetailRepository.Base(CardDetailCloudDataSource.Base(
                     cloudModule.service(
                         CardDetailService::class.java),
                     gson,
