@@ -1,4 +1,4 @@
-package com.example.binlist.bins.data.dto
+package com.example.binlist.cards.data.dto
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,8 +1,8 @@
-package com.example.binlist.bins.data
+package com.example.binlist.cards.data
 
 import android.util.Log
 import com.example.binlist.Card
-import com.example.binlist.bins.data.cloud.CardDetailCloudDataSourse
+import com.example.binlist.cards.data.cloud.CardDetailCloudDataSourse
 
 /**
  * @author Vitaly.N on 17.01.2023.

@@ -1,4 +1,4 @@
-package com.example.binlist.bins.data.cloud
+package com.example.binlist.cards.data.cloud
 
 import okhttp3.ResponseBody
 import retrofit2.http.GET

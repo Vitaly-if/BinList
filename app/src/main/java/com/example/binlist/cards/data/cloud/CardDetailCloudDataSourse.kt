@@ -1,6 +1,6 @@
-package com.example.binlist.bins.data.cloud
+package com.example.binlist.cards.data.cloud
 
-import com.example.binlist.bins.data.dto.CardDTO
+import com.example.binlist.cards.data.dto.CardDTO
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
