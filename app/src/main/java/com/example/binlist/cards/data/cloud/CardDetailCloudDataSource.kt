@@ -7,10 +7,10 @@ import com.google.gson.reflect.TypeToken
 /**
  * @author Vitaly.N on 17.01.2023.
  */
-interface CardDetailCloudDataSourse {
+interface CardDetailCloudDataSource {
     suspend fun fetchCardDetail(): CardDTO
 
-    abstract class Abstract(private val gson: Gson) : CardDetailCloudDataSourse {
+    abstract class Abstract(private val gson: Gson) : CardDetailCloudDataSource {
         override suspend fun fetchCardDetail(): CardDTO = gson.fromJson(
             getDataAsString(),
             object : TypeToken<CardDTO>() {}.type
