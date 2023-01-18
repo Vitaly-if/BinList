@@ -1,4 +1,4 @@
-package com.example.binlist.bins.data.cloud
+package com.example.binlist.cards.data.cloud
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

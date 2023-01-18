@@ -1,7 +1,7 @@
-package com.example.binlist.bins.domain
+package com.example.binlist.cards.domain
 
 import com.example.binlist.Card
-import com.example.binlist.bins.data.CardDetailRepository
+import com.example.binlist.cards.data.CardDetailRepository
 
 /**
  * @author Vitaly.N on 17.01.2023.

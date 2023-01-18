@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 
 import android.os.Bundle
-import com.example.binlist.bins.presentation.CardDetailViewModel
+import com.example.binlist.cards.presentation.CardDetailViewModel
 
 class MainActivity : AppCompatActivity() {
     //инициализируем ViewModel ленивым способом
