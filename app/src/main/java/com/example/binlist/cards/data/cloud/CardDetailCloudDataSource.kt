@@ -1,5 +1,6 @@
 package com.example.binlist.cards.data.cloud
 
+import com.example.binlist.cards.data.BinCard
 import com.example.binlist.cards.data.dto.CardDTO
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -20,9 +21,9 @@ interface CardDetailCloudDataSource {
     class Base(
         private val service: CardDetailService,
         gson: Gson,
-        private val bin: String
+        private val bin: BinCard.Read
     ) : Abstract(gson) {
-        override suspend fun getDataAsString(): String = service.fetchCardDetail(bin).string()
+        override suspend fun getDataAsString(): String = service.fetchCardDetail("45717360").string()
     }
 
 
