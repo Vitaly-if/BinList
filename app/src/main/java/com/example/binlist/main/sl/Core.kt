@@ -6,11 +6,13 @@ import com.example.binlist.cards.data.CacheModule
 import com.example.binlist.cards.data.cloud.CloudModule
 import com.example.binlist.main.NavigationCommunication
 import com.example.binlist.main.presentation.ResourceProvider
+import com.google.gson.Gson
 
 /**
  * @author Vitaly.N on 18.01.2023.
  */
-interface Core : CloudModule, CacheModule, ProvideNavigation, ProvideBinCard, ProvideResource {
+interface Core : CloudModule, CacheModule, ProvideNavigation, ProvideBinCard, ProvideResource,
+ProvideGson{
 
     class Base(
         context: Context,
@@ -21,6 +23,7 @@ interface Core : CloudModule, CacheModule, ProvideNavigation, ProvideBinCard, Pr
         private val navigationCommunication = NavigationCommunication.Base()
         private val resourceProvider = ResourceProvider.Base(context)
         private val binCard = BinCard.Base()
+        private var gson = Gson()
 
         override fun <T> service(clasz: Class<T>): T = CloudModule.Base().service(clasz)
 
@@ -31,6 +34,8 @@ interface Core : CloudModule, CacheModule, ProvideNavigation, ProvideBinCard, Pr
         override fun ProvideBinCard() = binCard
 
         override fun provideResource() = resourceProvider
+
+        override fun provideGson() = gson
 
     }
 }
@@ -45,4 +50,8 @@ interface ProvideBinCard {
 
 interface ProvideResource {
     fun provideResource(): ResourceProvider
+}
+
+interface ProvideGson {
+    fun provideGson(): Gson
 }
