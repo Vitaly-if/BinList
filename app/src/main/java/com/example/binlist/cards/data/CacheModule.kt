@@ -17,7 +17,7 @@ interface CacheModule {
             return@lazy Room.databaseBuilder(
                 context,
                 CardsDataBase::class.java,
-                "bins_database"
+                "cards_database"
             )
                 .fallbackToDestructiveMigration()
                 .build()

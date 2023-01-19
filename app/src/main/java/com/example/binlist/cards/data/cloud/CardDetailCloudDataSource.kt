@@ -22,7 +22,7 @@ interface CardDetailCloudDataSource {
         gson: Gson,
         private val bin: String
     ) : Abstract(gson) {
-        override suspend fun getDataAsString(): String = service.fetchCardDetail("45717360").string()
+        override suspend fun getDataAsString(): String = service.fetchCardDetail(bin).string()
     }
 
 
