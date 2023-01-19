@@ -60,10 +60,10 @@ interface CardDetailCacheDataSource {
                         data.bank.city)
                 )
             }
-            return CardData("",CardNumberData("", true),"","",
-            "",false,CardCountryData("","","","",
-                "",0,0),CardBankData("","","",
-                ""))
+            return CardData("", CardNumberData("", true), "", "",
+                "", false, CardCountryData("", "", "", "",
+                    "", 0, 0), CardBankData("", "", "",
+                    ""))
         }
 
         override suspend fun saveCard(cardData: CardData) {

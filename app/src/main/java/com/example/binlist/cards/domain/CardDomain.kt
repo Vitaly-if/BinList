@@ -1,28 +1,28 @@
-package com.example.binlist.cards.data
+package com.example.binlist.cards.domain
 
 /**
- * @author Vitaly.N on 18.01.2023.
+ * @author Vitaly.N on 19.01.2023.
  */
-data class CardData(
+data class CardDomain(
     private val bin: String,
-    private val number: CardNumberData,
+    private val number: CardNumberDomain,
     private val scheme: String,
     private val type: String,
     private val brand: String,
     private val boolean: Boolean,
-    private val country: CardCountryData,
-    private val bank: CardBankData,
+    private val country: CardCountryDomain,
+    private val bank: CardBankDomain,
 ) {
     interface Mapper<T> {
         fun map(
             bin: String,
-            number: CardNumberData,
+            number: CardNumberDomain,
             scheme: String,
             type: String,
             brand: String,
             boolean: Boolean,
-            country: CardCountryData,
-            bank: CardBankData,
+            country: CardCountryDomain,
+            bank: CardBankDomain,
         ): T
     }
 
@@ -33,12 +33,12 @@ data class CardData(
         bank)
 }
 
-data class CardNumberData(
+data class CardNumberDomain(
     val length: String,
     val luhn: Boolean,
 )
 
-data class CardCountryData(
+data class CardCountryDomain(
     val numeric: String,
     val alpha2: String,
     val name: String,
@@ -48,9 +48,10 @@ data class CardCountryData(
     val longitude: Int,
 )
 
-data class CardBankData(
+data class CardBankDomain(
     val name: String,
     val url: String,
     val phone: String,
     val city: String,
 )
+

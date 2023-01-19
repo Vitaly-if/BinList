@@ -10,35 +10,32 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "cards_table")
 data class CardCache(
-    @PrimaryKey @ColumnInfo(name = "bin") val bin: String,
-    @Embedded
-    val number: CardNumberCache,
-    val scheme: String,
-    val type: String,
-    val brand: String,
-    val boolean: Boolean,
-    @Embedded
-    val country: CardCountryCache,
-    @Embedded
-    val bank: CardBankCache,
+    @PrimaryKey @ColumnInfo(name = "bin") var bin: String = "",
+    @Embedded(prefix = "number_") var number: CardNumberCache = CardNumberCache(),
+    var scheme: String = "",
+    var type: String = "",
+    var brand: String = "",
+    var boolean: Boolean = false,
+    @Embedded(prefix = "country_") var country: CardCountryCache = CardCountryCache(),
+    @Embedded(prefix = "bank_") var bank: CardBankCache = CardBankCache(),
 )
 data class CardNumberCache(
-    val length: String,
-    val luhn: Boolean
+    var length: String = "",
+    var luhn: Boolean = false
 )
 data class CardCountryCache(
-    val numeric: String,
-    val alpha2: String,
-    val name: String,
-    val emoji: String,
-    val currency: String,
-    val latitude: Int,
-    val longitude: Int,
+    var numeric: String = "",
+    var alpha2: String = "",
+    var name: String = "",
+    var emoji: String = "",
+    var currency: String = "",
+    var latitude: Int = 0,
+    var longitude: Int = 0,
 )
 data class CardBankCache(
-    val name: String,
-    val url: String,
-    val phone: String,
-    val city: String,
+    var name: String = "",
+    var url: String = "",
+    var phone: String = "",
+    var city: String = "",
 )
 
