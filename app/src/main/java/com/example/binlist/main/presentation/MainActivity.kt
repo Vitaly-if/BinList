@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), ProvideViewModel {
         viewModel.observe(this) { strategy ->
             strategy.navigate(supportFragmentManager, R.id.container)
         }
-        viewModel.init()
+        viewModel.init(savedInstanceState == null)
     }
 
     override fun <T : ViewModel> provideViewModel(clazz: Class<T>, owner: ViewModelStoreOwner): T =

@@ -12,7 +12,8 @@ class MainViewModel(
     private val navigationCommunication: NavigationCommunication.Mutable,
 ) : ViewModel(), Init, Communication.Observe<NavigationStrategy> {
 
-    override fun init() {
+    override fun init(isFirstRun: Boolean) {
+        if (isFirstRun)
         navigationCommunication.map(NavigationStrategy.Replace(Screen.Cards))
     }
 

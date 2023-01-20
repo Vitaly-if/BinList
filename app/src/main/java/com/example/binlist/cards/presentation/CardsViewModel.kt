@@ -1,45 +1,101 @@
 package com.example.binlist.cards.presentation
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.binlist.Card
-import com.example.binlist.cards.data.CardDTOToData
-import com.example.binlist.cards.data.CardDataToCache
-import com.example.binlist.cards.data.CardDetailRepository
-import com.example.binlist.cards.data.cache.CardDetailCacheDataSource
-import com.example.binlist.cards.data.cloud.CardDetailCloudDataSource
-import com.example.binlist.cards.data.cloud.CardDetailService
-import com.example.binlist.cards.data.cloud.CloudModule
-import com.example.binlist.cards.domain.CardDataToDomain
-import com.example.binlist.cards.domain.CardIterator
-import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import androidx.lifecycle.*
+import com.example.binlist.R
+import com.example.binlist.cards.domain.CardInteractor
+import com.example.binlist.main.NavigationCommunication
+import com.example.binlist.main.presentation.Init
+import com.example.binlist.main.presentation.NavigationStrategy
+import com.example.binlist.main.presentation.Screen
+import kotlinx.coroutines.delay
 
 /**
  * @author Vitaly.N on 17.01.2023.
  */
-class CardsViewModel(private val iterator: CardIterator.Base) : ViewModel() {
-    var card: MutableLiveData<Card> = MutableLiveData()
+interface CardsViewModel : Init, ClearError, ObserveCards, UpdateState, FetchCards {
+    fun showDetail(bin: String)
+    fun showDetail(card: CardUi)
+    class Base(
+        private val communications: CardsCommunication,
+        private val manageResources: ManageResources,
+        private val handleResult: HandleCardsRequest,
+        private val navigationCommunication: NavigationCommunication.Mutate,
+        private val interactor: CardInteractor.Base,
+    ) : ViewModel(), CardsViewModel {
 
-    init {
+        init {
 
-        getCard()
-    }
+        }
 
-    private fun getCard() {
-
-        viewModelScope.launch(Dispatchers.IO) {
-
-            iterator.fetchCard("45717360")
-            val cardinfo = iterator.cards()
-            withContext(Dispatchers.Main) {
-                //card.value = cardinfo
-                Log.i("vital", cardinfo.toString())
+        override fun init(isFirstRun: Boolean) {
+            if (isFirstRun)
+            handleResult.handle(viewModelScope) {
+                Log.i("vital", "InitIterator")
+                interactor.init()
             }
         }
+
+        override fun fetchCard(bin: String) {
+            if (bin.isEmpty())
+                communications.showState(UiState.ShowError(manageResources.string(R.string.empty_bin_error_message)))
+            else {
+                interactor.saveBinCard(bin)
+                handleResult.handle(viewModelScope) {
+                interactor.fetchCard(bin)
+                }}
+//            viewModelScope.launch(Dispatchers.IO) {
+//
+//                iterator.fetchCard("45717360")
+//                val cardinfo = iterator.cards()
+//                withContext(Dispatchers.Main) {
+//                    //card.value = cardinfo
+//                    Log.i("vital", cardinfo.toString())
+//                }
+//            }
+
+        }
+
+        override fun showDetail(bin: String) {
+            interactor.saveBinCard(bin)
+            navigationCommunication.map(NavigationStrategy.Replace(Screen.Detail))
+
+        }
+
+        override fun showDetail(card: CardUi) {
+            Log.i("Vital", "open detail")
+        }
+
+
+        override fun clearError() {
+            communications.showState(UiState.ClearError())
+        }
+
+        override fun observerProgress(owner: LifecycleOwner, observer: Observer<Int>) {
+            communications.observerProgress(owner, observer)
+        }
+
+        override fun observerState(owner: LifecycleOwner, observer: Observer<UiState>) =
+            communications.observerState(owner, observer)
+
+        override fun observeList(owner: LifecycleOwner, observer: Observer<List<CardUi>>) {
+            communications.observeList(owner, observer)
+        }
+
+        override fun updateState() {
+            communications.showState(UiState.Success())
+        }
     }
+}
+
+interface FetchCards {
+    fun fetchCard(bin: String)
+}
+
+interface UpdateState {
+    fun updateState()
+}
+
+interface ClearError {
+    fun clearError()
 }
