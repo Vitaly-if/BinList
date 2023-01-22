@@ -8,7 +8,7 @@ import com.example.binlist.cards.data.cache.CardNumberCache
 /**
  * @author Vitaly.N on 18.01.2023.
  */
-class CardDataToCache : CardData.Mapper<CardCache>{
+class CardDataToCache : CardData.Mapper<CardCache> {
     override fun map(
         bin: String,
         number: CardNumberData,
@@ -19,14 +19,18 @@ class CardDataToCache : CardData.Mapper<CardCache>{
         country: CardCountryData,
         bank: CardBankData,
     ): CardCache {
-       return CardCache(bin,
-           CardNumberCache(number.length,number.luhn) ,
-           scheme,
-           type,
-           brand,
-           boolean,
-           CardCountryCache(country.numeric,country.alpha2, country.name,
-           country.emoji, country.currency, country.latitude,country.longitude) ,
-          CardBankCache(bank.name, bank.url, bank.phone, bank.city) )
+        return CardCache(
+            bin,
+            CardNumberCache(number.length, number.luhn),
+            scheme,
+            type,
+            brand,
+            boolean,
+            CardCountryCache(
+                country.numeric, country.alpha2, country.name,
+                country.emoji, country.currency, country.latitude, country.longitude
+            ),
+            CardBankCache(bank.name, bank.url, bank.phone, bank.city)
+        )
     }
 }

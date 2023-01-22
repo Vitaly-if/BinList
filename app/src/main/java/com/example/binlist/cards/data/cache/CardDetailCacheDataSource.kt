@@ -23,7 +23,8 @@ interface CardDetailCacheDataSource {
         override suspend fun allCards(): List<CardData> {
             val data = dao.allCards()
             return data.map {
-                CardData(it.bin, CardNumberData(it.number.length, it.number.luhn),
+                CardData(
+                    it.bin, CardNumberData(it.number.length, it.number.luhn),
                     it.scheme, it.type, it.brand, it.boolean, CardCountryData(
                         it.country.numeric,
                         it.country.alpha2,
@@ -36,7 +37,8 @@ interface CardDetailCacheDataSource {
                         it.bank.name,
                         it.bank.url,
                         it.bank.phone,
-                        it.bank.city)
+                        it.bank.city
+                    )
                 )
             }
         }
@@ -44,7 +46,8 @@ interface CardDetailCacheDataSource {
         override suspend fun card(bin: String): CardData {
             val data = dao.card(bin)
             if (data != null) {
-                return CardData(data.bin, CardNumberData(data.number.length, data.number.luhn),
+                return CardData(
+                    data.bin, CardNumberData(data.number.length, data.number.luhn),
                     data.scheme, data.type, data.brand, data.boolean, CardCountryData(
                         data.country.numeric,
                         data.country.alpha2,
@@ -57,13 +60,20 @@ interface CardDetailCacheDataSource {
                         data.bank.name,
                         data.bank.url,
                         data.bank.phone,
-                        data.bank.city)
+                        data.bank.city
+                    )
                 )
             }
-            return CardData("", CardNumberData("", true), "", "",
-                "", false, CardCountryData("", "", "", "",
-                    "", 0, 0), CardBankData("", "", "",
-                    ""))
+            return CardData(
+                "", CardNumberData("", true), "", "",
+                "", false, CardCountryData(
+                    "", "", "", "",
+                    "", 0, 0
+                ), CardBankData(
+                    "", "", "",
+                    ""
+                )
+            )
         }
 
         override suspend fun saveCard(cardData: CardData) {

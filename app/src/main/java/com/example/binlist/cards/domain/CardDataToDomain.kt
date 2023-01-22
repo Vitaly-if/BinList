@@ -8,7 +8,7 @@ import com.example.binlist.cards.data.CardNumberData
 /**
  * @author Vitaly.N on 19.01.2023.
  */
-class CardDataToDomain : CardData.Mapper<CardDomain>{
+class CardDataToDomain : CardData.Mapper<CardDomain> {
     override fun map(
         bin: String,
         number: CardNumberData,
@@ -19,14 +19,18 @@ class CardDataToDomain : CardData.Mapper<CardDomain>{
         country: CardCountryData,
         bank: CardBankData,
     ): CardDomain {
-        return CardDomain(bin,
-            CardNumberDomain(number.length,number.luhn) ,
+        return CardDomain(
+            bin,
+            CardNumberDomain(number.length, number.luhn),
             scheme,
             type,
             brand,
             boolean,
-            CardCountryDomain(country.numeric,country.alpha2, country.name,
-                country.emoji, country.currency, country.latitude,country.longitude) ,
-            CardBankDomain(bank.name, bank.url, bank.phone, bank.city) )
+            CardCountryDomain(
+                country.numeric, country.alpha2, country.name,
+                country.emoji, country.currency, country.latitude, country.longitude
+            ),
+            CardBankDomain(bank.name, bank.url, bank.phone, bank.city)
+        )
     }
 }

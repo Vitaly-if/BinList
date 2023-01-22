@@ -14,7 +14,6 @@ import kotlinx.coroutines.delay
  * @author Vitaly.N on 17.01.2023.
  */
 interface CardsViewModel : Init, ClearError, ObserveCards, UpdateState, FetchCards {
-    fun showDetail(bin: String)
     fun showDetail(card: CardUi)
     class Base(
         private val communications: CardsCommunication,
@@ -22,6 +21,7 @@ interface CardsViewModel : Init, ClearError, ObserveCards, UpdateState, FetchCar
         private val handleResult: HandleCardsRequest,
         private val navigationCommunication: NavigationCommunication.Mutate,
         private val interactor: CardInteractor.Base,
+        private val mapperDetailUi: CardUi.Mapper<String>
     ) : ViewModel(), CardsViewModel {
 
         init {
@@ -30,10 +30,10 @@ interface CardsViewModel : Init, ClearError, ObserveCards, UpdateState, FetchCar
 
         override fun init(isFirstRun: Boolean) {
             if (isFirstRun)
-            handleResult.handle(viewModelScope) {
-                Log.i("vital", "InitIterator")
-                interactor.init()
-            }
+                handleResult.handle(viewModelScope) {
+                    interactor.init()
+                }
+
         }
 
         override fun fetchCard(bin: String) {
@@ -42,8 +42,9 @@ interface CardsViewModel : Init, ClearError, ObserveCards, UpdateState, FetchCar
             else {
                 interactor.saveBinCard(bin)
                 handleResult.handle(viewModelScope) {
-                interactor.fetchCard(bin)
-                }}
+                    interactor.fetchCard(bin)
+                }
+            }
 //            viewModelScope.launch(Dispatchers.IO) {
 //
 //                iterator.fetchCard("45717360")
@@ -56,16 +57,11 @@ interface CardsViewModel : Init, ClearError, ObserveCards, UpdateState, FetchCar
 
         }
 
-        override fun showDetail(bin: String) {
-            interactor.saveBinCard(bin)
+        override fun showDetail(card: CardUi) {
+            interactor.saveBinCard(card.map(mapperDetailUi))
             navigationCommunication.map(NavigationStrategy.Replace(Screen.Detail))
 
         }
-
-        override fun showDetail(card: CardUi) {
-            Log.i("Vital", "open detail")
-        }
-
 
         override fun clearError() {
             communications.showState(UiState.ClearError())
