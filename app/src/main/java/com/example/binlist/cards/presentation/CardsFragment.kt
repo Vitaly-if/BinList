@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.binlist.R
 import com.example.binlist.main.presentation.BaseFragment
@@ -35,6 +36,9 @@ class CardsFragment : BaseFragment<CardsViewModel.Base>() {
         val adapter = CardsAdapter(object : ClickListener {
             override fun click(item: CardUi) = viewModel.showDetail(item)
         })
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(
+            false
+        )
         recyclerView.adapter = adapter
         viewModel.init(savedInstanceState == null)
         buttonGo.setOnClickListener {

@@ -31,7 +31,7 @@ interface DependencyContainer {
         override fun <T : ViewModel> module(clasz: Class<T>): Module<*> = when (clasz) {
             MainViewModel::class.java -> MainModule(core)
             CardsViewModel.Base::class.java -> CardsModule(core)
-            CardDetailViewModel::class.java -> CardDetailModule()
+            CardDetailViewModel.Base::class.java -> CardDetailModule(core)
             else -> dependencyContainer.module(clasz)
         }
 

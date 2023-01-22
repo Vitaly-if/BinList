@@ -11,14 +11,16 @@ data class CardUi(private val bin: String, private val scheme: String) : Mapper<
     fun <T> map(mapper: Mapper<T>): T = mapper.map(bin, scheme)
 
     interface Mapper<T> {
-        fun map(id: String, fact: String): T
+        fun map(bin: String, scheme: String): T
     }
+
     override fun map(source: CardUi) = source.bin == bin
 
 }
-
-class DetailsUi : CardUi.Mapper<String> {
-    override fun map(bin: String, scheme: String): String = "$bin\n\n$scheme"
+class DetailUi: CardUi.Mapper<String> {
+    override fun map(bin: String, scheme: String): String {
+        return bin
+    }
 }
 
 class ListItemUi(

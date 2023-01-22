@@ -2,7 +2,7 @@ package com.example.binlist.cards.sl
 
 import com.example.binlist.cards.data.CardDTOToData
 import com.example.binlist.cards.data.CardDataToCache
-import com.example.binlist.cards.data.CardDetailRepository
+import com.example.binlist.cards.data.CardRepository
 import com.example.binlist.cards.data.cache.CardDetailCacheDataSource
 import com.example.binlist.cards.data.cloud.CardDetailCloudDataSource
 import com.example.binlist.cards.data.cloud.CardDetailService
@@ -16,7 +16,7 @@ import com.example.binlist.main.sl.Module
  */
 class CardsModule(private val core: Core) : Module<CardsViewModel.Base> {
     override fun viewModel(): CardsViewModel.Base {
-        val repository = ProvideNumbersRepository.Base(core).provideNumbersRepository()
+        val repository = ProvideCardssRepository.Base(core).provideCardsRepository()
         val communication = CardsCommunication.Base(
             ProgressCommunication.Base(),
             CardsStateCommunication.Base(),
@@ -38,23 +38,24 @@ class CardsModule(private val core: Core) : Module<CardsViewModel.Base> {
                 core.ProvideBinCard(),
                 HandleRequest.Base(
                     HandleError.Base(core), repository)
-            ))
+            ),
+        DetailUi())
     }
 
 }
 
-interface ProvideNumbersRepository {
+interface ProvideCardssRepository {
 
-    fun provideNumbersRepository(): CardDetailRepository
+    fun provideCardsRepository(): CardRepository
 
-    class Base(private val core: Core) : ProvideNumbersRepository {
+    class Base(private val core: Core) : ProvideCardssRepository {
 
-        override fun provideNumbersRepository(): CardDetailRepository {
+        override fun provideCardsRepository(): CardRepository {
             val cacheDataSource = CardDetailCacheDataSource.Base(
                 core.provideDataBase().cardsDao(),
                 CardDataToCache()
             )
-            return CardDetailRepository.Base(
+            return CardRepository.Base(
                 CardDetailCloudDataSource.Base(
                     core.service(CardDetailService::class.java),
                     core.provideGson(),

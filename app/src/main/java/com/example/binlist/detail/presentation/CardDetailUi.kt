@@ -1,46 +1,41 @@
-package com.example.binlist.cards.data
+package com.example.binlist.detail.presentation
 
-/**
- * @author Vitaly.N on 18.01.2023.
- */
-data class CardData(
+data class CardDetailUi(
     private val bin: String,
-    private val number: CardNumberData,
+    private val number: CardNumberDetailUi,
     private val scheme: String,
     private val type: String,
     private val brand: String,
     private val boolean: Boolean,
-    private val country: CardCountryData,
-    private val bank: CardBankData = CardBankData("", "", "", ""),
+    private val country: CardCountryDetailUi,
+    private val bank: CardBankDetailUi,
 ) {
     interface Mapper<T> {
         fun map(
             bin: String,
-            number: CardNumberData,
+            number: CardNumberDetailUi,
             scheme: String,
             type: String,
             brand: String,
             boolean: Boolean,
-            country: CardCountryData,
-            bank: CardBankData,
+            country: CardCountryDetailUi,
+            bank: CardBankDetailUi,
         ): T
     }
 
-    fun <T> map(mapper: Mapper<T>): T = mapper.map(
-        bin, number, scheme, type,
+    fun <T> map(mapper: Mapper<T>): T = mapper.map(bin, number, scheme, type,
         brand,
         boolean,
         country,
-        bank
-    )
+        bank)
 }
 
-data class CardNumberData(
+data class CardNumberDetailUi(
     val length: String,
     val luhn: Boolean,
 )
 
-data class CardCountryData(
+data class CardCountryDetailUi(
     val numeric: String,
     val alpha2: String,
     val name: String,
@@ -50,9 +45,11 @@ data class CardCountryData(
     val longitude: Int,
 )
 
-data class CardBankData(
+data class CardBankDetailUi(
     val name: String,
     val url: String,
     val phone: String,
     val city: String,
 )
+
+

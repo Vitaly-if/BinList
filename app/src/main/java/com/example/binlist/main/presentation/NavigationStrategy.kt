@@ -1,5 +1,6 @@
 package com.example.binlist.main.presentation
 
+import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
@@ -24,18 +25,10 @@ interface NavigationStrategy {
 
     data class Replace(override val screen: Screen) : Abstract(screen) {
         override fun FragmentTransaction.executeTransaction(containerId: Int): FragmentTransaction =
-            replace(containerId,
+            replace(
+                containerId,
                 screen.fragment().newInstance(),
-                screen.fragment().simpleName).addToBackStack("FRAGMENT_TAG")
-    }
-
-    data class Add(override val screen: Screen) :
-        Abstract(screen) {
-
-        override fun FragmentTransaction.executeTransaction(containerId: Int): FragmentTransaction =
-            screen.fragment().let {
-                add(containerId, it.newInstance()).addToBackStack(it.simpleName)
-            }
-
+                screen.fragment().simpleName
+            ).addToBackStack("FRAGMENT_TAG")
     }
 }

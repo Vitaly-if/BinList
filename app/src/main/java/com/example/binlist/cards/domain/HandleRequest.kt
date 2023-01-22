@@ -1,6 +1,6 @@
 package com.example.binlist.cards.domain
 
-import com.example.binlist.cards.data.CardDetailRepository
+import com.example.binlist.cards.data.CardRepository
 import com.example.binlist.cards.presentation.HandleError
 
 /**
@@ -12,7 +12,7 @@ interface HandleRequest {
 
     class Base(
         private val handleError: HandleError<String>,
-        private val repository: CardDetailRepository
+        private val repository: CardRepository
     ) : HandleRequest {
 
         override suspend fun handle(block: suspend () -> Unit) = try {
