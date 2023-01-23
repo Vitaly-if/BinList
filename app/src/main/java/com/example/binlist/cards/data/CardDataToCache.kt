@@ -15,7 +15,7 @@ class CardDataToCache : CardData.Mapper<CardCache> {
         scheme: String,
         type: String,
         brand: String,
-        boolean: Boolean,
+        prepaid: Boolean,
         country: CardCountryData,
         bank: CardBankData,
     ): CardCache {
@@ -25,7 +25,7 @@ class CardDataToCache : CardData.Mapper<CardCache> {
             scheme,
             type,
             brand,
-            boolean,
+            prepaid,
             CardCountryCache(
                 country.numeric, country.alpha2, country.name,
                 country.emoji, country.currency, country.latitude, country.longitude

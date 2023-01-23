@@ -26,14 +26,5 @@ interface CardDetailViewModel : Init, ObserveCardsDetail {
         override fun observeCard(owner: LifecycleOwner, observer: Observer<CardDetailUi>) {
             communication.observeCard(owner, observer)
         }
-
-
     }
-//                iterator.fetchCard("45717360")
-//                val cardinfo = iterator.cards()
-//                withContext(Dispatchers.Main) {
-//                    //card.value = cardinfo
-//                    Log.i("vital", cardinfo.toString())
-//                }
-//            }
 }

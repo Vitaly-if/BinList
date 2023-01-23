@@ -1,6 +1,18 @@
 <resources>
-    <string name="app_name">BinList</string>
+    <string name="app_name">Bin Card Checker</string>
     <string name="no_connection_message">No internet connection</string>
     <string name="service_is_unavailable">Service is unavailable</string>
     <string name="empty_bin_error_message">Please enter a bin</string>
+    <string name="check">Check</string>
+    <string name="title_bin_card_checker">Bin Card Checker</string>
+    <string name="type">TYPE</string>
+    <string name="prepaid">PREPAID</string>
+    <string name="card_number">CARD NUMBER</string>
+    <string name="length">LENGTH</string>
+    <string name="luhn">LUHN</string>
+    <string name="country">COUNTRY</string>
+    <string name="bank">BANK</string>
+    <string name="scheme_network">SCHEME / NETWORK</string>
+    <string name="brand">BRAND</string>
+    <string name="hint_default">45717360</string>
 </resources>

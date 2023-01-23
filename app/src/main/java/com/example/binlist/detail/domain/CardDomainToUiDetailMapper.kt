@@ -9,25 +9,25 @@ import com.example.binlist.detail.presentation.CardCountryDetailUi
 import com.example.binlist.detail.presentation.CardDetailUi
 import com.example.binlist.detail.presentation.CardNumberDetailUi
 
-class CardDomainToUiDetailMapper: CardDomain.Mapper<CardDetailUi> {
+class CardDomainToUiDetailMapper : CardDomain.Mapper<CardDetailUi> {
     override fun map(
         bin: String,
         number: CardNumberDomain,
         scheme: String,
         type: String,
         brand: String,
-        boolean: Boolean,
+        prepaid: Boolean,
         country: CardCountryDomain,
-        bank: CardBankDomain
+        bank: CardBankDomain,
     ): CardDetailUi {
         return CardDetailUi(bin,
-            CardNumberDetailUi(number.length,number.luhn) ,
+            CardNumberDetailUi(number.length, number.luhn),
             scheme,
             type,
             brand,
-            boolean,
-            CardCountryDetailUi(country.numeric,country.alpha2, country.name,
-                country.emoji, country.currency, country.latitude,country.longitude) ,
-            CardBankDetailUi(bank.name, bank.url, bank.phone, bank.city) )
+            prepaid,
+            CardCountryDetailUi(country.numeric, country.alpha2, country.name,
+                country.emoji, country.currency, country.latitude, country.longitude),
+            CardBankDetailUi(bank.name, bank.url, bank.phone, bank.city))
     }
 }

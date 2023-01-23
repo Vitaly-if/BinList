@@ -10,7 +10,7 @@ data class CardDTO(
     @SerializedName("scheme") val scheme: String = "",
     @SerializedName("type") val type: String = "",
     @SerializedName("brand") val brand: String = "",
-    @SerializedName("prepaid") val boolean: Boolean = false,
+    @SerializedName("prepaid") val prepaid: Boolean = false,
     @SerializedName("country") val country: CardCountryDTO = CardCountryDTO(),
     @SerializedName("bank") val bank: CardBankDTO? = CardBankDTO(),
 ) {
@@ -21,7 +21,7 @@ data class CardDTO(
             scheme: String,
             type: String,
             brand: String,
-            boolean: Boolean,
+            prepaid: Boolean,
             country: CardCountryDTO,
             bank: CardBankDTO?,
         ): T
@@ -30,7 +30,7 @@ data class CardDTO(
     fun <T> map(mapper: Mapper<T>, bin: String): T = mapper.map(
         bin, number, scheme, type,
         brand,
-        boolean,
+        prepaid,
         country,
         bank
     )
