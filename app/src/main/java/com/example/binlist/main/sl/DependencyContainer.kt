@@ -19,24 +19,17 @@ interface DependencyContainer {
         override fun <T : ViewModel> module(clasz: Class<T>): Module<T> {
             throw IllegalStateException("no module found for $clasz")
         }
-
     }
 
     class Base(
         private val core: Core,
         private val dependencyContainer: DependencyContainer = Error(),
     ) : DependencyContainer {
-
-
         override fun <T : ViewModel> module(clasz: Class<T>): Module<*> = when (clasz) {
             MainViewModel::class.java -> MainModule(core)
             CardsViewModel.Base::class.java -> CardsModule(core)
             CardDetailViewModel.Base::class.java -> CardDetailModule(core)
             else -> dependencyContainer.module(clasz)
         }
-
-
-
-
     }
 }

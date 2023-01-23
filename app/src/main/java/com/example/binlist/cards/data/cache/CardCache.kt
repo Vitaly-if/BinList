@@ -15,7 +15,7 @@ data class CardCache(
     var scheme: String = "",
     var type: String = "",
     var brand: String = "",
-    var boolean: Boolean = false,
+    var prepaid: Boolean = false,
     @Embedded(prefix = "country_") var country: CardCountryCache = CardCountryCache(),
     @Embedded(prefix = "bank_") var bank: CardBankCache = CardBankCache(),
 )

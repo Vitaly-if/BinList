@@ -55,7 +55,6 @@ interface ObserveCards {
 interface ProgressCommunication : Communication.Mutable<Int> {
     class Base : Communication.Post<Int>(), ProgressCommunication
 }
-
 interface CardsStateCommunication : Communication.Mutable<UiState> {
     class Base : Communication.Post<UiState>(), CardsStateCommunication
 }

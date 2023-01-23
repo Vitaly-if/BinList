@@ -17,22 +17,21 @@ class CardDTOToData : CardDTO.Mapper<CardData> {
         scheme: String,
         type: String,
         brand: String,
-        boolean: Boolean,
+        prepaid: Boolean,
         country: CardCountryDTO,
         bank: CardBankDTO?,
     ): CardData {
-        Log.i("vital", "")
         var bankData = if (bank == null)
             CardBankData("", "", "", "")
         else
-        CardBankData(bank.name, bank.url, bank.phone, bank.city)
+            CardBankData(bank.name, bank.url, bank.phone, bank.city)
         return CardData(
             bin,
             CardNumberData(number.length, number.luhn),
             scheme,
             type,
             brand,
-            boolean,
+            prepaid,
             CardCountryData(
                 country.numeric, country.alpha2, country.name,
                 country.emoji, country.currency, country.latitude, country.longitude

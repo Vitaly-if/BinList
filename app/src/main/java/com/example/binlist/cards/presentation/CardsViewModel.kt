@@ -1,6 +1,5 @@
 package com.example.binlist.cards.presentation
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.binlist.R
 import com.example.binlist.cards.domain.CardInteractor
@@ -8,7 +7,6 @@ import com.example.binlist.main.NavigationCommunication
 import com.example.binlist.main.presentation.Init
 import com.example.binlist.main.presentation.NavigationStrategy
 import com.example.binlist.main.presentation.Screen
-import kotlinx.coroutines.delay
 
 /**
  * @author Vitaly.N on 17.01.2023.
@@ -21,19 +19,14 @@ interface CardsViewModel : Init, ClearError, ObserveCards, UpdateState, FetchCar
         private val handleResult: HandleCardsRequest,
         private val navigationCommunication: NavigationCommunication.Mutate,
         private val interactor: CardInteractor.Base,
-        private val mapperDetailUi: CardUi.Mapper<String>
+        private val mapperDetailUi: CardUi.Mapper<String>,
     ) : ViewModel(), CardsViewModel {
-
-        init {
-
-        }
 
         override fun init(isFirstRun: Boolean) {
             if (isFirstRun)
                 handleResult.handle(viewModelScope) {
                     interactor.init()
                 }
-
         }
 
         override fun fetchCard(bin: String) {
@@ -45,16 +38,6 @@ interface CardsViewModel : Init, ClearError, ObserveCards, UpdateState, FetchCar
                     interactor.fetchCard(bin)
                 }
             }
-//            viewModelScope.launch(Dispatchers.IO) {
-//
-//                iterator.fetchCard("45717360")
-//                val cardinfo = iterator.cards()
-//                withContext(Dispatchers.Main) {
-//                    //card.value = cardinfo
-//                    Log.i("vital", cardinfo.toString())
-//                }
-//            }
-
         }
 
         override fun showDetail(card: CardUi) {

@@ -15,7 +15,7 @@ class CardDataToDomain : CardData.Mapper<CardDomain> {
         scheme: String,
         type: String,
         brand: String,
-        boolean: Boolean,
+        prepaid: Boolean,
         country: CardCountryData,
         bank: CardBankData,
     ): CardDomain {
@@ -25,7 +25,7 @@ class CardDataToDomain : CardData.Mapper<CardDomain> {
             scheme,
             type,
             brand,
-            boolean,
+            prepaid,
             CardCountryDomain(
                 country.numeric, country.alpha2, country.name,
                 country.emoji, country.currency, country.latitude, country.longitude

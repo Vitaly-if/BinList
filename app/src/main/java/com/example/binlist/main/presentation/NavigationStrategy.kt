@@ -1,6 +1,5 @@
 package com.example.binlist.main.presentation
 
-import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 

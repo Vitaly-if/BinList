@@ -32,14 +32,13 @@ class CardsModule(private val core: Core) : Module<CardsViewModel.Base> {
 
             ), core.provideNavigation(),
 
-
             CardInteractor.Base(
                 repository,
                 core.ProvideBinCard(),
                 HandleRequest.Base(
                     HandleError.Base(core), repository)
             ),
-        DetailUi())
+            DetailUi())
     }
 
 }

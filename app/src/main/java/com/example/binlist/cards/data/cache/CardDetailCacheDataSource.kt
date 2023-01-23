@@ -25,7 +25,7 @@ interface CardDetailCacheDataSource {
             return data.map {
                 CardData(
                     it.bin, CardNumberData(it.number.length, it.number.luhn),
-                    it.scheme, it.type, it.brand, it.boolean, CardCountryData(
+                    it.scheme, it.type, it.brand, it.prepaid, CardCountryData(
                         it.country.numeric,
                         it.country.alpha2,
                         it.country.name,
@@ -48,7 +48,7 @@ interface CardDetailCacheDataSource {
             if (data != null) {
                 return CardData(
                     data.bin, CardNumberData(data.number.length, data.number.luhn),
-                    data.scheme, data.type, data.brand, data.boolean, CardCountryData(
+                    data.scheme, data.type, data.brand, data.prepaid, CardCountryData(
                         data.country.numeric,
                         data.country.alpha2,
                         data.country.name,

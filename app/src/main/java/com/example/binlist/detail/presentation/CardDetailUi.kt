@@ -6,7 +6,7 @@ data class CardDetailUi(
     private val scheme: String,
     private val type: String,
     private val brand: String,
-    private val boolean: Boolean,
+    private val prepaid: Boolean,
     private val country: CardCountryDetailUi,
     private val bank: CardBankDetailUi,
 ) {
@@ -25,7 +25,7 @@ data class CardDetailUi(
 
     fun <T> map(mapper: Mapper<T>): T = mapper.map(bin, number, scheme, type,
         brand,
-        boolean,
+        prepaid,
         country,
         bank)
 }

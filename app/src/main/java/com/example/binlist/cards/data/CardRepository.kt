@@ -16,14 +16,13 @@ interface CardRepository {
         private val cardDetailCloudDataSource: CardDetailCloudDataSource,
         private val cardDetailCacheDataSource: CardDetailCacheDataSource,
         private val dataToDomainMapper: CardData.Mapper<CardDomain>,
-        private val dtoToDataMapper: CardDTO.Mapper<CardData>
+        private val dtoToDataMapper: CardDTO.Mapper<CardData>,
     ) :
         CardRepository {
 
         override suspend fun fetchCard(bin: String) {
             val cardDTO = cardDetailCloudDataSource.fetchCardDetail()
             cardDetailCacheDataSource.saveCard(cardDTO.map(dtoToDataMapper, bin))
-
         }
 
         override suspend fun fetchCardDetail(bin: String): CardDomain {
