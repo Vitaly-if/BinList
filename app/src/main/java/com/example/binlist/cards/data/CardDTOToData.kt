@@ -25,17 +25,25 @@ class CardDTOToData : CardDTO.Mapper<CardData> {
             CardBankData("", "", "", "")
         else
             CardBankData(bank.name, bank.url, bank.phone, bank.city)
+        var countryData = if (country == null)
+            CardCountryData("", "", "", "", "", 0, 0)
+        else
+            CardCountryData(
+                country.numeric, country.alpha2, country.name,
+                country.emoji, country.currency, country.latitude, country.longitude
+            )
+        var brandData = if (brand == null)
+            "" else brand
+        var typeData = if (type == null)
+            "" else type
         return CardData(
             bin,
             CardNumberData(number.length, number.luhn),
             scheme,
-            type,
-            brand,
+            typeData,
+            brandData,
             prepaid,
-            CardCountryData(
-                country.numeric, country.alpha2, country.name,
-                country.emoji, country.currency, country.latitude, country.longitude
-            ),
+            countryData,
             bankData
         )
     }

@@ -15,6 +15,8 @@ interface HandleError<T> {
         override fun handle(e: Exception) = manageResources.string(
             when (e) {
                 is NoInternetConnectionException -> R.string.no_connection_message
+                is retrofit2.HttpException -> R.string.card_not_found
+                is NullPointerException -> R.string.card_not_found
                 else -> R.string.service_is_unavailable
             }
         )
