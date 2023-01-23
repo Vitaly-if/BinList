@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Bin Card Checker</string>
     <string name="no_connection_message">No internet connection</string>
+    <string name="error_processing_data">Data processing error</string>
     <string name="card_not_found">Card not found</string>
     <string name="service_is_unavailable">Service is unavailable</string>
     <string name="empty_bin_error_message">Please enter a bin</string>

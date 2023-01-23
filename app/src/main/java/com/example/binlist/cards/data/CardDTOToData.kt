@@ -15,8 +15,8 @@ class CardDTOToData : CardDTO.Mapper<CardData> {
         bin: String,
         number: CardNumberDTO,
         scheme: String,
-        type: String,
-        brand: String,
+        type: String?,
+        brand: String?,
         prepaid: Boolean,
         country: CardCountryDTO,
         bank: CardBankDTO?,
@@ -33,9 +33,11 @@ class CardDTOToData : CardDTO.Mapper<CardData> {
                 country.emoji, country.currency, country.latitude, country.longitude
             )
         var brandData = if (brand == null)
-            "" else brand
+            ""
+        else brand
         var typeData = if (type == null)
-            "" else type
+            ""
+        else type
         return CardData(
             bin,
             CardNumberData(number.length, number.luhn),
